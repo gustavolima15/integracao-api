@@ -3,15 +3,19 @@ const axios = require('axios');
 
 const app = express();
 
+const instanciaAxios = axios.create({
+    baseURL:'http://localhost:3001',
+})
+
 app.use(express.json());
 
 app.get('/', async (req, res) => {
     //const resultados = await axios.get('http://localhost:3001/carros');
     const novoCarro = {
-        modelo: 'Fusca',
+        modelo: 'Jetta',
         marca: 'VW'
     }
-    const resultados = await axios.post('http://localhost:3001/carros', novoCarro)
+    const resultados = await instanciaAxios.post('/carros', novoCarro)
 
     return res.json(resultados.data);
 });
